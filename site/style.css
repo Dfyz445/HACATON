@@ -1,19 +1,16 @@
-/* --- ПРАВИЛЬНОЕ ОПРЕДЕЛЕНИЕ ШРИФТОВ --- */
 @font-face {
-  font-family: 'MyCustomFont'; /* Имя первого шрифта */
-  src: url('font/MontserratAlternates-Bold.ttf') format('truetype'); /* Путь к файлу и формат */
-  font-weight: normal; /* Укажи вес */
-  font-style: normal;  /* Укажи стиль */
-  /* Добавь font-display: swap; для лучшей производительности */
+  font-family: 'MyCustomFont';
+  src: url('font/MontserratAlternates-Bold.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal; 
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MyCustomFont_2'; /* Имя второго шрифта */
-  src: url('font/MontserratAlternates-Medium.ttf') format('truetype'); /* Путь к файлу и формат */
-  font-weight: normal; /* Укажи вес */
-  font-style: normal;  /* Укажи стиль */
-  /* Добавь font-display: swap; для лучшей производительности */
+  font-family: 'MyCustomFont_2'; 
+  src: url('font/MontserratAlternates-Medium.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal; 
   font-display: swap;
 }
 :root {
@@ -187,7 +184,7 @@ label {
 }
 
 input[type="text"],
-input[type="tel"], /* Исправлена ошибка */
+input[type="tel"],
 input[type="email"],
 textarea {
     width: 100%;
@@ -291,7 +288,6 @@ button {
     color: #aaa;
     cursor: not-allowed;
 }
-/* Оставить ТОЛЬКО эти строки — всё остальное по галочке удали */
 .checkbox-group input[type="checkbox"] {
     margin-right: 10px;
     width: 20px;
@@ -338,4 +334,20 @@ button {
         padding: 10px 16px;
         font-size: 0.95em;
     }
+}
+.thank-you-screen .btn-back-to-home {
+    margin-top: 30px;
+    padding: 14px 40px;
+    background-color: #9e8b95;
+    color: #ececec;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.thank-you-screen .btn-back-to-home:hover {
+    background-color: #8aa096;
 }

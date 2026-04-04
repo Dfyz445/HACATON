@@ -10,9 +10,10 @@
 
     <div class="quiz-container">
         <div id="thankYouScreen" class="thank-you-screen">
-            <h2>Спасибо!</h2>
-            <p>Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
-        </div>
+        <h2>Спасибо!</h2>
+        <p>Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
+        <button type="button" class="btn-back-to-home" id="backToHome">Вернуться на главную</button>
+    </div>
 
         <div id="step1" class="step active">
             <h2>Какое помещение вы планируете оформить?</h2>
@@ -33,7 +34,6 @@
         <div id="step2" class="step">
             <h2>Какие зоны нужно включить в дизайн-проект?</h2>
             <div class="options-grid">
-                <!-- Теперь это просто div-ы с классом без label и input -->
                 <div class="option-card multiple" data-value="Кухня">Кухня</div>
                 <div class="option-card multiple" data-value="Гостиная">Гостиная</div>
                 <div class="option-card multiple" data-value="Спальня">Спальня</div>
@@ -57,7 +57,7 @@
             <div class="slider-container">
                 <div class="slider-label">
                     <span>20 м²</span>
-                    <span class="current-value" id="areaValue">60 м²</span> <!-- Исправлена ошибка: id перемещён в span -->
+                    <span class="current-value" id="areaValue">60 м²</span> 
                     <span>300 м²</span>
                 </div>
                 <input type="range" id="areaSlider" min="20" max="300" step="5" value="60">
@@ -69,7 +69,7 @@
         </div>
 
         <div id="step4" class="step">
-            <h2>Какой стиль интерьже?</h2>
+            <h2>Какой стиль интерьера?</h2>
             <div class="options-grid">
                 <div class="option-card single-choice" data-value="Современный">Современный</div>
                 <div class="option-card single-choice" data-value="Минимализм">Минимализм</div>
@@ -97,7 +97,7 @@
             </div>
             <div class="error-message" id="error-step5">Пожалуйста, укажите бюджет.</div>
             <div class="nav-buttons">
-                <button type="button" class id="backToStep4">Назад</button>
+                <button type="button" class="btn-back" id="backToStep4">Назад</button>
                 <button type="button" class="btn-next" id="nextToStep6" disabled>Далее</button>
             </div>
         </div>
@@ -126,9 +126,12 @@
                 <label for="consent">Я соглашаюсь на обработку персональных данных *</label>
                 <div class="error-message" id="error-consent">Необходимо согласие на обработку данных.</div>
             </div>
-        </div>
 
-        <!-- Прогресс-бар -->
+            <div class="nav-buttons">
+                <button type="button" class="btn-back" id="backToStep5">Назад</button>
+                <button type="button" class="btn-submit" id="submitBtn">Получить консультацию</button> 
+            </div>
+        </div>
         <div class="progress-container">
             <div class="progress-bar">
                 <div class="progress-bar-fill" id="progressBarFill"></div>
@@ -137,6 +140,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script> <!-- Подключение внешнего JS -->
+    <script src="script.js"></script> 
 </body>
 </html>

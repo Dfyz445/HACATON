@@ -1,22 +1,18 @@
-/* --- ПРАВИЛЬНОЕ ОПРЕДЕЛЕНИЕ ШРИФТОВ --- */
 @font-face {
-  font-family: 'MyCustomFont'; /* Имя первого шрифта */
-  src: url('font/MontserratAlternates-Bold.ttf') format('truetype'); /* Путь к файлу и формат */
-  font-weight: normal; /* Укажи вес */
-  font-style: normal;  /* Укажи стиль */
-  /* Добавь font-display: swap; для лучшей производительности */
+  font-family: 'MyCustomFont'; 
+  src: url('font/MontserratAlternates-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; 
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MyCustomFont_2'; /* Имя второго шрифта */
-  src: url('font/MontserratAlternates-Medium.ttf') format('truetype'); /* Путь к файлу и формат */
-  font-weight: normal; /* Укажи вес */
-  font-style: normal;  /* Укажи стиль */
-  /* Добавь font-display: swap; для лучшей производительности */
+  font-family: 'MyCustomFont_2'; 
+  src: url('font/MontserratAlternates-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; 
   font-display: swap;
 }
-/* --- КОНЕЦ ОПРЕДЕЛЕНИЯ ШРИФТОВ --- */
 
 :root {
     --primary-color: #8aa096;
@@ -34,8 +30,8 @@
 }
 
 body {
-    font-family: 'MyCustomFont_2', sans-serif; /* Используем второй шрифт как основной */
-    background-color: #d6ccca; /* Исправил опечатку в цвете */
+    font-family: 'MyCustomFont_2', sans-serif;
+    background-color: #d6ccca; 
     color: var(--text-color);
     line-height: 1.6;
     padding: 0;
@@ -48,48 +44,110 @@ body {
     padding: 20px;
 }
 
-/* Шапка */
 header {
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
     margin-bottom: 30px;
-    position: relative; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+.subtitle {
+    font-size: 18px;
+    color: #53484e;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+.header-content {
+    padding: 60px 0;
+}
+
+.nav-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden; 
+    white-space: nowrap;
+    overflow: touch;
+    padding-bottom: 8px; 
 }
 
 .nav-list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 32px;
+    padding: 14px 20px;
+    background-color: #9e8b95;
+    border-radius: 45px;
     border-bottom: 2px solid #9e8b95;
     list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Расстояние между пунктами */
-    margin-bottom: 20px;
+    min-width: fit-content;
+}
+
+.nav-list li {
+    display: inline-block;
 }
 
 .nav-list a {
+    position: relative;
     text-decoration: none;
     font-size: 18px;
+    font-weight: 600;
     color: #2b2d39;
-    font-weight: bold;
     padding: 8px 16px;
-    border-radius: 4px;
-    transition: var(--transition);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 .nav-list a:hover {
-    background-color: #d6ccca;
-    color: var(--primary-color);
+    color: #d6ccca;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .nav-list {
+        gap: 16px;
+        padding: 12px 10px;
+    }
+    .nav-list a {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-list {
+        gap: 8px;
+        padding: 10px 5px;
+    }
+    .nav-list a {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
 }
 
 h1 {
-    font-family: 'MyCustomFont', sans-serif; /* Используем первый шрифт для h1 */
+    font-family: 'MyCustomFont', sans-serif;
     margin-top: 90px;
-    font-size: 40px;
+    font-size: clamp(2rem, 5vw, 58px);
     margin-bottom: 5px;
     color: var(--text-color);
 }
 
 .subtitle {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 18px);
     color: #53484e;
     max-width: 600px;
     margin: 0 auto 30px;
@@ -102,21 +160,21 @@ h1 {
 .content-section {
     border-top: 2px solid #9e8b95;
     border-bottom: 2px solid #9e8b95;
-    padding: 20px 0; /* Отступы внутри секции */
-    margin-bottom: 20px; /* Отступ снизу между секциями */
+    padding: 70px 0;
+    margin-bottom: 20px;
 }
 .content-section_2 {
     border-bottom: 2px solid #9e8b95;
-    padding: 15px 0; /* Отступы внутри секции */
-    margin-bottom: 20px; /* Отступ снизу между секциями */
+    padding: 60px 0; 
+    margin-bottom: 20px; 
 }
 .content-section_3 {
-    padding: 20px 0; /* Отступы внутри секции */
-    margin-bottom: 40px; /* Отступ снизу между секциями */
+    padding: 40px 0;
+    margin-bottom: 40px; 
 }
 
 .content-section h2, .content-section_2 h2, .content-section_3 h2 {
-    font-family: 'MyCustomFont_2', sans-serif; /* Используем второй шрифт для h2 */
+    font-family: 'MyCustomFont_2', sans-serif;
     text-align: center;
     font-size: 30px;
     margin-bottom: 15px;
@@ -149,40 +207,39 @@ li {
 
 .contact-item {
     background: transparent;
-    padding: 0; /* Убираем внутренние отступы */
+    padding: 0; 
     border: none;
     border-radius: 0;
-    flex: 1 1 200px; /* Растягивается, минимальная ширина */
+    flex: 1 1 200px;
     text-align: center;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 45px;
     background-color: var(--secondary-color);
 }
 .contact-item:hover {
     background-color: #9e8b95;
-    color: #ececec; /* <-- Если хочешь менять и цвет текста */
+    color: #ececec;
 }
 
 .contact-link {
-    color: inherit; /* Наследует цвет от родителя (.contact-item или его дочерних элементов) */
-    text-decoration: none; /* Убираем подчеркивание по умолчанию */
-    display: block; /* Делаем ссылку блочным элементом, чтобы занимала всю ширину карточки */
-    padding: 8px; /* Добавим немного отступа внутри ссылки */
-    border-radius: inherit; /* Наследует скругление от .contact-item */
-    transition: var(--transition); /* Применяем переход */
+    color: inherit;
+    text-decoration: none; 
+    display: block; 
+    padding: 8px;
+    border-radius: inherit;
+    transition: var(--transition);
 }
 
 .contact-link:hover {
     background-color: #9e8b95;
 }
 
-/* Новый стиль для обёртки кнопки */
-.quiz-link-wrapper {
-    margin-top: 30px; /* Отступ сверху */
-    margin-bottom: 30px; /* Отступ снизу */
-    text-align: center; /* Выравнивание по правому краю */
-}
 
+.quiz-link-wrapper {
+    margin-top: 30px; 
+    margin-bottom: 30px; 
+    text-align: center; 
+}
 .start-quiz-button {
     padding: 16px 60px; 
     background-color: var(--primary-color); 
@@ -190,9 +247,9 @@ li {
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    border-radius: 25px;
-    transition: var(--transition); /* Плавный переход */
-    display: inline-block; /* Чтобы padding работал */
+    border-radius: 45px;
+    transition: var(--transition);
+    display: inline-block;
 }
 
 .start-quiz-button:hover {
@@ -204,13 +261,12 @@ footer {
     padding: 20px 0;
     color: #666;
     font-size: 0.9em;
-    border-top: 1px solid var(--border-color); /* Тонкая линия сверху футера */
+    border-top: 1px solid var(--border-color); 
 }
 
 /* Адаптив */
 @media (max-width: 768px) {
     .nav-list {
-        flex-direction: column; /* Делаем вертикальный список на мобилах */
         align-items: center;
     }
     h1 {
@@ -220,7 +276,7 @@ footer {
         font-size: 1em;
     }
     .quiz-link-wrapper {
-        text-align: center; /* Центрируем кнопку на мобилах */
+        text-align: center;
     }
 }
 
