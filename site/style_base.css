@@ -1,0 +1,212 @@
+:root {
+    --primary-color: #8aa096;
+    --secondary-color: #8aa096;
+    --text-color: #2b2d39;
+    --border-color: #8aa096;
+    --shadow: 0 2px 10px #0000005a;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #d6ccca;
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 0; /* Убрали внешний отступ */
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px; /* Внутренний отступ контейнера */
+}
+
+/* Шапка */
+header {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    position: relative; 
+}
+
+.nav-list {
+    border-bottom: 2px solid #9e8b95;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Расстояние между пунктами */
+    margin-bottom: 20px;
+}
+
+.nav-list a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #2b2d39;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.nav-list a:hover {
+    background-color: #d6ccca;
+    color: var(--primary-color);
+}
+
+h1 {
+    margin-top: 90px;
+    font-size: 40px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #53484e;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+#about ul, #help ul {
+    list-style-type: none; 
+    padding-left: 0;  
+    margin-left: 1.25cm;
+}
+.content-section {
+    border-top: 2px solid #9e8b95;
+    border-bottom: 2px solid #9e8b95;
+    padding: 20px 0; /* Отступы внутри секции */
+    margin-bottom: 20px; /* Отступ снизу между секциями */
+}
+.content-section_2 {
+    border-bottom: 2px solid #9e8b95;
+    padding: 15px 0; /* Отступы внутри секции */
+    margin-bottom: 20px; /* Отступ снизу между секциями */
+}
+.content-section_3 {
+    padding: 20px 0; /* Отступы внутри секции */
+    margin-bottom: 40px; /* Отступ снизу между секциями */
+}
+
+.content-section h2, .content-section_2 h2, .content-section_3 h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: #53484e;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.contact-item {
+    background: transparent;
+    padding: 0; /* Убираем внутренние отступы */
+    border: none;
+    border-radius: 0;
+    flex: 1 1 200px; /* Растягивается, минимальная ширина */
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+}
+.contact-item:hover {
+    background-color: #9e8b95;
+    color: #ececec; /* <-- Если хочешь менять и цвет текста */
+}
+
+.contact-link {
+    color: inherit; /* Наследует цвет от родителя (.contact-item или его дочерних элементов) */
+    text-decoration: none; /* Убираем подчеркивание по умолчанию */
+    display: block; /* Делаем ссылку блочным элементом, чтобы занимала всю ширину карточки */
+    padding: 8px; /* Добавим немного отступа внутри ссылки */
+    border-radius: inherit; /* Наследует скругление от .contact-item */
+    transition: var(--transition); /* Применяем переход */
+}
+
+.contact-link:hover {
+    background-color: #9e8b95;
+}
+
+/* Новый стиль для обёртки кнопки */
+.quiz-link-wrapper {
+    margin-top: 30px; /* Отступ сверху */
+    margin-bottom: 30px; /* Отступ снизу */
+    text-align: center; /* Выравнивание по правому краю */
+}
+
+.start-quiz-button {
+    padding: 16px 60px; 
+    background-color: var(--primary-color); 
+    color: #ececec;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: var(--transition); /* Плавный переход */
+    display: inline-block; /* Чтобы padding работал */
+}
+
+.start-quiz-button:hover {
+    background-color: #9e8b95;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+    font-size: 0.9em;
+    border-top: 1px solid var(--border-color); /* Тонкая линия сверху футера */
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .nav-list {
+        flex-direction: column; /* Делаем вертикальный список на мобилах */
+        align-items: center;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    .subtitle {
+        font-size: 1em;
+    }
+    .quiz-link-wrapper {
+        text-align: center; /* Центрируем кнопку на мобилах */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    h1 {
+        font-size: 1.7em;
+    }
+}
