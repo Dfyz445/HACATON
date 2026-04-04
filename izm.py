@@ -3,6 +3,10 @@ import mysql.connector
 from mysql.connector import Error
 import logging
 
+vib = input("Вы уверены? y/n: ")
+if vib == "n":
+    exit()
+
 DB_CONFIG = {
     'host': '26.64.81.120',
     'port': 3306,          # <-- МЕНЯЙ ПОРТ ТУТ
@@ -26,13 +30,13 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
         sql_insert = """
             INSERT INTO leads 
             (phone_number, first_name, last_name, area, room_types_rtp_id, budgets_bdt_id,
-             styles_stl_id, status, consent_accepted, page_url, utm_source)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+             styles_stl_id, status, consent_accepted)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-
+            #После удаления n обезательно убрать n кол-во VALUES(%s)
         values = (
             lead_data['phone'],
-            lead_data.get('first_name'),  # поменял местами чтобы было логично
+            lead_data.get('first_name'),
             lead_data.get('last_name'),
             lead_data.get('area'),
             lead_data.get('room_type_id'),
@@ -40,8 +44,6 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
             lead_data.get('style_id'),
             'new',
             1,
-            lead_data.get('url'),
-            lead_data.get('utm_source')
         )
 
         cursor.execute(sql_insert, values)
@@ -71,15 +73,13 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
 
 if __name__ == "__main__":
     test_data = {
-        'phone': '+79990001122',
-        'first_name': 'Тестовый Клиент',
-        'last_name': 'Тестовый Клиент',
-        'area': 60,
-        'room_type_id': 1,  # ID из таблицы room_types
-        'budget_id': 2,     # ID из budgets
-        'style_id': 4,      # ID из styles
-        'url': 'https://quiz-site.ru/',
-        'utm_source': 'test'
+        'phone': '+78653741488',
+        'first_name': 'Сергей',
+        'last_name': 'Николаевич',
+        'area': 122,
+        'room_type_id': 1,  # ID из таблицы room_types(1-Кв;2-ЧД;3-Офис;4-Ком.пом;5-Студия;6-Другое)
+        'budget_id': 2,     # ID из budgets(1-до 500.000;2-500.000-1.000.000;3-1.000.000-2.000.000;4- от 2.000.000; 5-не знаю)
+        'style_id': 4,      # ID из styles(1-Современный;2-Минимализм;3-Сканд;4-Лофт;5-Неокласс;6-Класс;7-Не опред)
     }
     save_lead_to_db(test_data, zone_ids=[1, 3])
 
