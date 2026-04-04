@@ -2,6 +2,7 @@
 import mysql.connector
 from mysql.connector import Error
 import logging
+import re
 
 vib = input("Вы уверены? y/n: ")
 if vib == "n":
@@ -19,6 +20,21 @@ DB_CONFIG = {
 }
 
 def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
+    required_fields = ['first_name', 'last_name', 'area', 'room_type_id', 'budget_id', 'style_id', 'email']
+    # Проверка обязательных полей
+    missing_fields = [field for field in required_fields if not lead_data.get(field)]
+
+    if missing_fields:
+        print(f"Ошибка: отсутствуют или пусты обязательные поля: {', '.join(missing_fields)}")
+        return None
+
+    if re.search(r'\d', lead_data.get('first_name', '')):
+        print("Имя не должно содержать цифры")
+        return None
+    if re.search(r'\d', lead_data.get('last_name', '')):
+        print("Фамилия не должна содержать цифры")
+        return None
+
     conn = None
     try:
         # 1. Подключение
@@ -64,7 +80,7 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
     except Error as e:
         if conn:
             conn.rollback() # Если ошибка — отменяем всё
-        print(f"❌ Ошибка сохранения: {e}")
+        print(f"Ошибка сохранения: {e}")
         logging.error(f"DB Error: {e}")
         return None
     finally:
@@ -75,8 +91,8 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
 if __name__ == "__main__":
     test_data = {
         'phone': '+78653741488',
-        'first_name': 'test',
-        'last_name': 'testovich',
+        'first_name': 'Иван',
+        'last_name': 'ыааыаыа',
         'area': 666,
         'room_type_id': 1,  # ID из таблицы room_types(1-Кв;2-ЧД;3-Офис;4-Ком.пом;5-Студия;6-Другое)
         'budget_id': 2,     # ID из budgets(1-до 500.000;2-500.000-1.000.000;3-1.000.000-2.000.000;4- от 2.000.000; 5-не знаю)
