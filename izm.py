@@ -30,8 +30,8 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
         sql_insert = """
             INSERT INTO leads 
             (phone_number, first_name, last_name, area, room_types_rtp_id, budgets_bdt_id,
-             styles_stl_id, status, consent_accepted)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+             styles_stl_id, status, consent_accepted,email)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
             #После удаления n обезательно убрать n кол-во VALUES(%s)
         values = (
@@ -42,8 +42,9 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
             lead_data.get('room_type_id'),
             lead_data.get('budget_id'),
             lead_data.get('style_id'),
-            'new',
-            1,
+            'new', #НЕ ТРОГАТЬ!!!!
+            1, # НЕ ТРОГАТЬ!!!!
+            lead_data.get('email'),
         )
 
         cursor.execute(sql_insert, values)
@@ -74,12 +75,13 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
 if __name__ == "__main__":
     test_data = {
         'phone': '+78653741488',
-        'first_name': 'Сергей',
-        'last_name': 'Николаевич',
-        'area': 122,
+        'first_name': 'test',
+        'last_name': 'testovich',
+        'area': 666,
         'room_type_id': 1,  # ID из таблицы room_types(1-Кв;2-ЧД;3-Офис;4-Ком.пом;5-Студия;6-Другое)
         'budget_id': 2,     # ID из budgets(1-до 500.000;2-500.000-1.000.000;3-1.000.000-2.000.000;4- от 2.000.000; 5-не знаю)
         'style_id': 4,      # ID из styles(1-Современный;2-Минимализм;3-Сканд;4-Лофт;5-Неокласс;6-Класс;7-Не опред)
+        'email': 'evgen@gmail.com'
     }
     save_lead_to_db(test_data, zone_ids=[1, 3])
 
