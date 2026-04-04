@@ -3,143 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Смарт-квиз | Дизайн-проект помещения</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Дизайн-проект помещения | Смарт-квиз</title>
+    <link rel="stylesheet" href="style_base.css"> <!-- Подключение внешнего CSS -->
 </head>
 <body>
-
-    <div class="quiz-container">
-        <div id="thankYouScreen" class="thank-you-screen">
-        <h2>Спасибо!</h2>
-        <p>Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
-        <button type="button" class="btn-back-to-home" id="backToHome">Вернуться на главную</button>
-    </div>
-
-        <div id="step1" class="step active">
-            <h2>Какое помещение вы планируете оформить?</h2>
-            <div class="options-grid">
-                <div class="option-card single-choice" data-value="Квартира">Квартира</div>
-                <div class="option-card single-choice" data-value="Частный дом">Частный дом</div>
-                <div class="option-card single-choice" data-value="Офис">Офис</div>
-                <div class="option-card single-choice" data-value="Коммерческое помещение">Коммерческое помещение</div>
-                <div class="option-card single-choice" data-value="Студия / апартаменты">Студия / апартаменты</div>
-                <div class="option-card single-choice" data-value="Другое">Другое</div>
-            </div>
-            <div class="error-message" id="error-step1">Пожалуйста, выберите тип помещения.</div>
-            <div class="nav-buttons_0">
-                <button type="button" class="btn-next" id="nextToStep2" disabled>Далее</button>
-            </div>
-        </div>
-
-        <div id="step2" class="step">
-            <h2>Какие зоны нужно включить в дизайн-проект?</h2>
-            <div class="options-grid">
-                <div class="option-card multiple" data-value="Кухня">Кухня</div>
-                <div class="option-card multiple" data-value="Гостиная">Гостиная</div>
-                <div class="option-card multiple" data-value="Спальня">Спальня</div>
-                <div class="option-card multiple" data-value="Детская">Детская</div>
-                <div class="option-card multiple" data-value="Санузел">Санузел</div>
-                <div class="option-card multiple" data-value="Прихожая">Прихожая</div>
-                <div class="option-card multiple" data-value="Кабинет">Кабинет</div>
-                <div class="option-card multiple" data-value="Гардеробная">Гардеробная</div>
-                <div class="option-card multiple" data-value="Балкон / лоджия">Балкон / лоджия</div>
-                <div class="option-card multiple" data-value="Полностью всё помещение">Полностью всё помещение</div>
-            </div>
-            <div class="error-message" id="error-step2">Пожалуйста, выберите хотя бы одну зону.</div>
-            <div class="nav-buttons">
-                <button type="button" class="btn-back" id="backToStep1">Назад</button>
-                <button type="button" class="btn-next" id="nextToStep3" disabled>Далее</button>
-            </div>
-        </div>
-
-        <div id="step3" class="step">
-            <h2>Укажите примерную площадь помещения</h2>
-            <div class="slider-container">
-                <div class="slider-label">
-                    <span>20 м²</span>
-                    <span class="current-value" id="areaValue">60 м²</span> 
-                    <span>300 м²</span>
+    <div class="container">
+        <!-- Шапка с навигацией -->
+        <header>
+            <nav>
+                <!-- Новый контейнер для горизонтального скролла -->
+                <div class="nav-scroll-container">
+                    <ul class="nav-list">
+                        <li><a href="#about">О квизе</a></li>
+                        <li><a href="#help">Помощь</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
                 </div>
-                <input type="range" id="areaSlider" min="20" max="300" step="5" value="60">
+            </nav>
+            <!-- Новый div для контента, который ты хочешь "раздуть" -->
+            <div class="header-content">
+                <h1>Создайте идеальный интерьер</h1>
+                <p class="subtitle">Пройдите короткий квиз, и мы подготовим для вас индивидуальное предложение по дизайну вашего помещения.</p>
+                <div class="quiz-link-wrapper">
+                    <a href="qwiz.html" class="start-quiz-button">Пройти квиз</a>
+                </div>
             </div>
-            <div class="nav-buttons">
-                <button type="button" class="btn-back" id="backToStep2">Назад</button>
-                <button type="button" class="btn-next" id="nextToStep4">Далее</button>
-            </div>
-        </div>
+        </header>
+        <section id="about" class="content-section">
+            <h2>О квизе</h2>
+            <p>Наш интерактивный смарт-квиз состоит из 6 простых шагов:</p>
+            <ul>
+                <li><strong>Тип помещения:</strong> Квартира, дом, офис и т.д.</li>
+                <li><strong>Зоны проекта:</strong> Выберите комнаты, которые хотите включить.</li>
+                <li><strong>Площадь:</strong> Укажите примерный размер.</li>
+                <li><strong>Стиль интерьера:</strong> Современный, минимализм, лофт и другие.</li>
+                <li><strong>Бюджет:</strong> Определите ориентировочную стоимость.</li>
+                <li><strong>Контактные данные:</strong> Оставьте информацию для связи.</li>
+            </ul>
+            <p>Это поможет нам лучше понять ваши потребности и предложить наиболее подходящее решение.</p>
+        </section>
 
-        <div id="step4" class="step">
-            <h2>Какой стиль интерьера?</h2>
-            <div class="options-grid">
-                <div class="option-card single-choice" data-value="Современный">Современный</div>
-                <div class="option-card single-choice" data-value="Минимализм">Минимализм</div>
-                <div class="option-card single-choice" data-value="Скандинавский">Скандинавский</div>
-                <div class="option-card single-choice" data-value="Лофт">Лофт</div>
-                <div class="option-card single-choice" data-value="Неоклассика">Неоклассика</div>
-                <div class="option-card single-choice" data-value="Классика">Классика</div>
-                <div class="option-card single-choice" data-value="Пока не определился">Пока не определился</div>
-            </div>
-            <div class="error-message" id="error-step4">Пожалуйста, выберите стиль.</div>
-            <div class="nav-buttons">
-                <button type="button" class="btn-back" id="backToStep3">Назад</button>
-                <button type="button" class="btn-next" id="nextToStep5" disabled>Далее</button>
-            </div>
-        </div>
+        <!-- Секция "Помощь" -->
+        <section id="help" class="content-section_2">
+            <h2>Помощь</h2>
+            <p>Если у вас возникли трудности с прохождением квиза:</p>
+            <ul>
+                <li>Убедитесь, что вы заполнили все обязательные поля (помечены звёздочкой *).</li>
+                <li>Проверьте формат ввода номера телефона.</li>
+                <li>Если квиз не отвечает, попробуйте обновить страницу.</li>
+                <li>Вы можете вернуться на предыдущие шаги и изменить свои ответы.</li>
+            </ul>
+        </section>
 
-        <div id="step5" class="step">
-            <h2>Какой бюджет на реализацию интерьера вы рассматриваете?</h2>
-            <div class="options-grid">
-                <div class="option-card single-choice" data-value="До 500 000 ₽">До 500 000 ₽</div>
-                <div class="option-card single-choice" data-value="500 000 – 1 000 000 ₽">500 000 – 1 000 000 ₽</div>
-                <div class="option-card single-choice" data-value="1 000 000 – 2 000 000 ₽">1 000 000 – 2 000 000 ₽</div>
-                <div class="option-card single-choice" data-value="От 2 000 000 ₽">От 2 000 000 ₽</div>
-                <div class="option-card single-choice" data-value="Пока не знаю">Пока не знаю</div>
+        <!-- Секция "Контакты" -->
+        <section id="contact" class="content-section_3">
+            <h2>Связаться с нами</h2>
+            <p>Если у вас остались вопросы, вы можете связаться с нами любым удобным способом:</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Телефон</h3>
+                    <a href="tel:+7800 008 88 04" class="contact-link">+7 (800) 008-88-04</a>
+                </div>
+                <div class="contact-item">
+                    <h3>E-mail</h3>
+                    <a href="mailto:TyuTyu.py@gmail.com" class="contact-link">TyuTyu.py@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h3>Telegram</h3>
+                    <a href="https://t.me/TyuTyu.py" class="contact-link">@hiri</a>
+                </div>
             </div>
-            <div class="error-message" id="error-step5">Пожалуйста, укажите бюджет.</div>
-            <div class="nav-buttons">
-                <button type="button" class="btn-back" id="backToStep4">Назад</button>
-                <button type="button" class="btn-next" id="nextToStep6" disabled>Далее</button>
-            </div>
-        </div>
-
-        <div id="step6" class="step">
-            <h2>Оставьте контакты, и мы свяжемся с вами по вашему проекту</h2>
-            <div class="form-group">
-                <label for="name">Имя</label>
-                <input type="text" id="name" placeholder="Ваше имя">
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон *</label>
-                <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
-                <div class="error-message" id="error-phone">Пожалуйста, введите корректный номер телефона.</div>
-            </div>
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="your@email.com">
-            </div>
-            <div class="form-group">
-                <label for="comment">Комментарий</label>
-                <textarea id="comment" placeholder="Дополнительная информация"></textarea>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="consent" required>
-                <label for="consent">Я соглашаюсь на обработку персональных данных *</label>
-                <div class="error-message" id="error-consent">Необходимо согласие на обработку данных.</div>
-            </div>
-
-            <div class="nav-buttons">
-                <button type="button" class="btn-back" id="backToStep5">Назад</button>
-                <button type="button" class="btn-submit" id="submitBtn">Получить консультацию</button> 
-            </div>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-bar-fill" id="progressBarFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">Шаг 1 из 6</div>
-        </div>
+        </section>
+        <footer>
+            <p>&copy; 2026 SmartQuiz. Все права защищены.</p>
+        </footer>
     </div>
-
-    <script src="script.js"></script> 
 </body>
 </html>

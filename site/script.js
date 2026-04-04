@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, true);
 
     document.getElementById('backToHome')?.addEventListener('click', function() {
-    window.location.href = 'base.html';
+    window.location.href = 'index.html';
 });
     document.getElementById('name').addEventListener('input', function() {
         state.answers.name = this.value.trim();
