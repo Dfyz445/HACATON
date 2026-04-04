@@ -1,10 +1,28 @@
+/* --- ПРАВИЛЬНОЕ ОПРЕДЕЛЕНИЕ ШРИФТОВ --- */
+@font-face {
+  font-family: 'MyCustomFont'; /* Имя первого шрифта */
+  src: url('font/MontserratAlternates-Bold.ttf') format('truetype'); /* Путь к файлу и формат */
+  font-weight: normal; /* Укажи вес */
+  font-style: normal;  /* Укажи стиль */
+  /* Добавь font-display: swap; для лучшей производительности */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MyCustomFont_2'; /* Имя второго шрифта */
+  src: url('font/MontserratAlternates-Medium.ttf') format('truetype'); /* Путь к файлу и формат */
+  font-weight: normal; /* Укажи вес */
+  font-style: normal;  /* Укажи стиль */
+  /* Добавь font-display: swap; для лучшей производительности */
+  font-display: swap;
+}
 :root {
     --primary-color: #8aa096;
     --secondary-color: #f8f9fa;
     --text-color: #2b2d39;
     --border-color: #ddd;
-    --error-color: #dc3545;
-    --success-color: #28a745;
+    --error-color: #9a000f;
+    --success-color: #8aa096;
     --disabled-color: #e9ecef;
     --shadow: 0 2px 10px rgba(0,0,0,0.1);
     --transition: all 0.3s ease;
@@ -17,7 +35,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'MyCustomFont_2', sans-serif;
     background-color: #d6ccca;
     color: var(--text-color);
     line-height: 1.6;
@@ -31,7 +49,7 @@ body {
 .quiz-container {
     width: 100%;
     max-width: 600px;
-    background: white;
+    background: #f1e6e4;
     border-radius: 12px;
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -55,7 +73,7 @@ body {
 
 .progress-container {
     padding: 20px 30px;
-    background-color: var(--secondary-color);
+    background-color: #c4a8b7;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -77,10 +95,11 @@ body {
     text-align: center;
     margin-top: 8px;
     font-size: 14px;
-    color: #666;
+    color: #2b2d3985;
 }
 
 h2 {
+    font-family: 'MyCustomFont', sans-serif;
     font-size: 1.5em;
     margin-bottom: 20px;
     color: var(--text-color);
@@ -94,7 +113,7 @@ h2 {
 
 .option-card {
     padding: 15px;
-    border: 2px solid var(--border-color);
+    border: 2px solid #9e8b95;
     border-radius: 8px;
     cursor: pointer;
     transition: var(--transition);
@@ -103,17 +122,20 @@ h2 {
 
 .option-card:hover {
     border-color: var(--primary-color);
-    background-color: #f0f4ff;
+    background-color: #9e8b9581;
+    color: #2b2d39;
 }
 
 .option-card.selected {
     border-color: var(--primary-color);
-    background-color: #eef4ff;
-    color: var(--primary-color);
+    background-color: #9e8b95de;
+    color: #ebe3e2;
+    font-weight: bold;
 }
 
 .option-card.multiple.selected {
-    background-color: #e0e7ff;
+    background-color: #9e8b95;
+    color: #ebe3e2;
 }
 
 input[type="checkbox"] {
@@ -140,7 +162,7 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    appearance: none;
     width: 20px;
     height: 20px;
     background: var(--primary-color);
@@ -255,18 +277,30 @@ button {
 }
 
 .btn-next, .btn-submit {
+    font-family: 'MyCustomFont_2', sans-serif;
     background-color: var(--primary-color);
     color: white;
 }
 
 .btn-next:hover, .btn-submit:hover {
-    background-color: #3a5af5;
+    background-color: #8aa096;
 }
 
 .btn-next:disabled, .btn-submit:disabled { /* Исправлена ошибка в селекторе */
     background-color: var(--disabled-color);
     color: #aaa;
     cursor: not-allowed;
+}
+/* Оставить ТОЛЬКО эти строки — всё остальное по галочке удали */
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] + label {
+    cursor: pointer;
 }
 
 /* Адаптив */

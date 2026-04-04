@@ -1,3 +1,23 @@
+/* --- ПРАВИЛЬНОЕ ОПРЕДЕЛЕНИЕ ШРИФТОВ --- */
+@font-face {
+  font-family: 'MyCustomFont'; /* Имя первого шрифта */
+  src: url('font/MontserratAlternates-Bold.ttf') format('truetype'); /* Путь к файлу и формат */
+  font-weight: normal; /* Укажи вес */
+  font-style: normal;  /* Укажи стиль */
+  /* Добавь font-display: swap; для лучшей производительности */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MyCustomFont_2'; /* Имя второго шрифта */
+  src: url('font/MontserratAlternates-Medium.ttf') format('truetype'); /* Путь к файлу и формат */
+  font-weight: normal; /* Укажи вес */
+  font-style: normal;  /* Укажи стиль */
+  /* Добавь font-display: swap; для лучшей производительности */
+  font-display: swap;
+}
+/* --- КОНЕЦ ОПРЕДЕЛЕНИЯ ШРИФТОВ --- */
+
 :root {
     --primary-color: #8aa096;
     --secondary-color: #8aa096;
@@ -14,18 +34,18 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #d6ccca;
+    font-family: 'MyCustomFont_2', sans-serif; /* Используем второй шрифт как основной */
+    background-color: #d6ccca; /* Исправил опечатку в цвете */
     color: var(--text-color);
     line-height: 1.6;
-    padding: 0; /* Убрали внешний отступ */
+    padding: 0;
     margin: 0;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px; /* Внутренний отступ контейнера */
+    padding: 20px;
 }
 
 /* Шапка */
@@ -61,6 +81,7 @@ header {
 }
 
 h1 {
+    font-family: 'MyCustomFont', sans-serif; /* Используем первый шрифт для h1 */
     margin-top: 90px;
     font-size: 40px;
     margin-bottom: 5px;
@@ -74,7 +95,7 @@ h1 {
     margin: 0 auto 30px;
 }
 #about ul, #help ul {
-    list-style-type: none; 
+    none; 
     padding-left: 0;  
     margin-left: 1.25cm;
 }
@@ -95,6 +116,7 @@ h1 {
 }
 
 .content-section h2, .content-section_2 h2, .content-section_3 h2 {
+    font-family: 'MyCustomFont_2', sans-serif; /* Используем второй шрифт для h2 */
     text-align: center;
     font-size: 30px;
     margin-bottom: 15px;
