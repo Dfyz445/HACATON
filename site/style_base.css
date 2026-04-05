@@ -81,7 +81,6 @@ header {
     background-color: #c45691c9;
     border-radius: 45px;
     border-bottom: 2px solid #c45691c9;
-;
     list-style: none;
     min-width: fit-content;
 }
@@ -96,7 +95,7 @@ header {
     font-size: 18px;
     font-weight: 600;
     color: #2b2d39;
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 6px;
     transition: all 0.3s ease;
 }
@@ -154,7 +153,7 @@ h1 {
     margin: 0 auto 30px;
 }
 #about ul, #help ul {
-    none; 
+    list-style: none; 
     padding-left: 0;  
     margin-left: 1.25cm;
 }

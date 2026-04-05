@@ -289,14 +289,17 @@ document.addEventListener('DOMContentLoaded', function () {
             goToStep(2);
         }
     });
+
     document.getElementById('backToStep1').addEventListener('click', function() {
         goToStep(1);
     });
+
     document.getElementById('nextToStep3').addEventListener('click', function() {
         if (validateStep(2)) {
             goToStep(3);
         }
     });
+
     document.getElementById('backToStep2').addEventListener('click', function() {
         goToStep(2);
     });
