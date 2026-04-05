@@ -47,13 +47,7 @@ User: quiz_api
 Password: Str0ngPass!23
 Database: mydb
 
-## Запуск бэкэнда
-
-В папке проекта откройте терминал и выполните:
-```
-pip install requirements.txt
-python app.py
-```
+> Убедитесь, что PHP документ расположен в одной папке с HTML, и можно открывать страницу сайта
 
 ### Разработчики
 - Скопич Ника - командир, Backend разработчик (t.me/kivi_inside)
