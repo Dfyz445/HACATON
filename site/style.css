@@ -283,7 +283,7 @@ button {
     background-color: #3b9f72;
 }
 
-.btn-next:disabled, .btn-submit:disabled { /* Исправлена ошибка в селекторе */
+.btn-next:disabled, .btn-submit:disabled {
     background-color: var(--disabled-color);
     color: #aaa;
     cursor: not-allowed;

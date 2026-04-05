@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 btn.textContent = 'Получить консультацию';
             }
         })
+
         .finally(() => {
             const btn = document.getElementById('submitBtn');
             if(btn && state.isSubmitting) {
