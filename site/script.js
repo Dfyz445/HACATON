@@ -34,21 +34,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToStep(stepNum) {
-    Object.values(steps).forEach(step => step.classList.remove('active'));
-    if (steps[stepNum]) {
-        steps[stepNum].classList.add('active');
-    } else if (stepNum === 'thankYou') {
-        thankYouScreen.style.display = 'block';
-        submitData();
-        document.querySelector('.progress-container').style.display = 'none';
+        if (stepNum === 'thankYou') {
+            if (thankYouScreen) thankYouScreen.style.display = 'block';
+            const progressContainer = document.querySelector('.progress-container');
+            if (progressContainer) progressContainer.style.display = 'none';
+            Object.values(steps).forEach(step => {
+                if (step) step.classList.remove('active');
+            });
+            submitData();
+            state.currentStep = 'thankYou';
+            return;
+        }
+
+        Object.values(steps).forEach(step => {
+            if (step) step.classList.remove('active');
+        });
+
+        if (steps[stepNum]) {
+            steps[stepNum].classList.add('active');
+        }
+
         state.currentStep = stepNum;
-        return; 
-    }
-    state.currentStep = stepNum;
-    if (stepNum !== 'thankYou') {
         updateProgressBar();
     }
-}
 
     function showError(elementId) {
         const el = document.getElementById(elementId);
@@ -125,17 +133,17 @@ document.addEventListener('DOMContentLoaded', function () {
             this.classList.add('selected');
             state.answers.room_type = this.getAttribute('data-value');
             const nextButton = document.getElementById('nextToStep2');
-            if (validateStep(1)) { 
+            if (validateStep(1)) {
                 nextButton.disabled = false;
             } else {
-                nextButton.disabled = true; 
+                nextButton.disabled = true;
             }
         });
     });
 
     document.querySelectorAll('#step2 .option-card.multiple').forEach(card => {
         card.addEventListener('click', function() {
-            const value = this.getAttribute('data-value'); 
+            const value = this.getAttribute('data-value');
             const isSelected = this.classList.contains('selected');
 
             if (isSelected) {
@@ -163,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (zones.includes(value)) {
                 card.classList.add('selected');
             } else {
-                card.classList.remove('selected'); 
+                card.classList.remove('selected');
             }
         });
         const nextButton = document.getElementById('nextToStep3');
@@ -178,10 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const slider = document.getElementById('areaSlider');
     const areaValueDisplay = document.getElementById('areaValue');
-    slider.addEventListener('input', function() {
-        state.answers.area = parseInt(this.value);
-        areaValueDisplay.textContent = state.answers.area + ' м²';
-    });
+    if (slider && areaValueDisplay) {
+        slider.addEventListener('input', function() {
+            state.answers.area = parseInt(this.value);
+            areaValueDisplay.textContent = state.answers.area + ' м²';
+        });
+    }
 
     document.querySelectorAll('#step4 .single-choice').forEach(card => {
         card.addEventListener('click', function() {
@@ -210,184 +220,270 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
     function restoreSingleSelectState(selector, value) {
         document.querySelectorAll(selector).forEach(card => {
             card.classList.toggle('selected', card.getAttribute('data-value') === value);
         });
     }
 
-    steps[2].addEventListener('click', function(e) {
-         if(e.target.closest('.option-card.multiple')) return; 
-         restoreMultiSelectState(state.answers.zones);
-    }, true);
+    if (steps[2]) {
+        steps[2].addEventListener('click', function(e) {
+            if(e.target.closest('.option-card.multiple')) return;
+            restoreMultiSelectState(state.answers.zones);
+        }, true);
+    }
 
-    steps[1].addEventListener('click', function(e) {
-         if(e.target.closest('.single-choice')) return;
-         restoreSingleSelectState('#step1 .single-choice', state.answers.room_type);
-         const nextButton = document.getElementById('nextToStep2');
-         if (state.answers.room_type) {
-             hideError('error-step1');
-             nextButton.disabled = false;
-         } else {
-             showError('error-step1');
-             nextButton.disabled = true;
-         }
-    }, true);
-
-    steps[4].addEventListener('click', function(e) {
-         if(e.target.closest('.single-choice')) return;
-         restoreSingleSelectState('#step4 .single-choice', state.answers.style);
-         const nextButton = document.getElementById('nextToStep5');
-         if (state.answers.style) {
-             hideError('error-step4');
-             nextButton.disabled = false;
-         } else {
-             showError('error-step4');
-             nextButton.disabled = true;
-         }
-    }, true);
-
-    steps[5].addEventListener('click', function(e) {
-         if(e.target.closest('.single-choice')) return;
-         restoreSingleSelectState('#step5 .single-choice', state.answers.budget);
-         const nextButton = document.getElementById('nextToStep6');
-         if (state.answers.budget) {
-             hideError('error-step5');
-             nextButton.disabled = false;
-         } else {
-             showError('error-step5');
-             nextButton.disabled = true;
-         }
-    }, true);
-
-    document.getElementById('backToHome')?.addEventListener('click', function() {
-    window.location.href = 'index.html';
-});
-    document.getElementById('name').addEventListener('input', function() {
-        state.answers.name = this.value.trim();
-    });
-    document.getElementById('phone').addEventListener('input', function() {
-        state.answers.phone = this.value.trim();
-        if (validateStep(6)) {
-            hideError('error-phone');
-        }
-    });
-    document.getElementById('email').addEventListener('input', function() {
-        state.answers.email = this.value.trim();
-    });
-    document.getElementById('comment').addEventListener('input', function() {
-        state.answers.comment = this.value.trim();
-    });
-    document.getElementById('consent').addEventListener('change', function() {
-        if (this.checked) {
-            hideError('error-consent');
-        }
-    });
-
-    document.getElementById('nextToStep2').addEventListener('click', function() {
-        if (validateStep(1)) {
-            goToStep(2);
-        }
-    });
-
-    document.getElementById('backToStep1').addEventListener('click', function() {
-        goToStep(1);
-    });
-
-    document.getElementById('nextToStep3').addEventListener('click', function() {
-        if (validateStep(2)) {
-            goToStep(3);
-        }
-    });
-
-    document.getElementById('backToStep2').addEventListener('click', function() {
-        goToStep(2);
-    });
-
-    document.getElementById('nextToStep4').addEventListener('click', function() {
-        goToStep(4);
-    });
-
-    document.getElementById('backToStep3').addEventListener('click', function() {
-        goToStep(3);
-    });
-
-    document.getElementById('nextToStep5').addEventListener('click', function() {
-        if (validateStep(4)) {
-            goToStep(5);
-        }
-    });
-
-    document.getElementById('backToStep4').addEventListener('click', function() {
-        goToStep(4);
-    });
-
-    document.getElementById('nextToStep6').addEventListener('click', function() {
-        if (validateStep(5)) {
-            goToStep(6);
-        }
-    });
-
-    document.getElementById('backToStep5').addEventListener('click', function() {
-        goToStep(5);
-    });
-
-    document.getElementById('submitBtn').addEventListener('click', function(e) {
-        e.preventDefault(); 
-        if (validateStep(6) && !state.isSubmitting) {
-            state.isSubmitting = true; 
-            this.disabled = true;
-            this.textContent = 'Отправка...';
-            goToStep('thankYou');
-        }
-    });
-
-    function submitData() {
-        const quizData = { ...state.answers };
-        quizData.page_url = window.location.href;
-        quizData.timestamp = new Date().toISOString();
-
-        console.log("Данные для отправки:", quizData);
-
-        fetch('path/to/your/handler.php', { //ЗАМЕНИТЬ ЭТОТ ПУТЬ, или пусть будет для примера
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(quizData),
-        })
-        .then(response => {
-            console.log("Ответ сервера:", response.status);
-            if (!response.ok) {
-                throw new Error(`Сервер вернул ошибку: ${response.status} ${response.statusText}`);
+    if (steps[1]) {
+        steps[1].addEventListener('click', function(e) {
+            if(e.target.closest('.single-choice')) return;
+            restoreSingleSelectState('#step1 .single-choice', state.answers.room_type);
+            const nextButton = document.getElementById('nextToStep2');
+            if (state.answers.room_type) {
+                hideError('error-step1');
+                nextButton.disabled = false;
+            } else {
+                showError('error-step1');
+                nextButton.disabled = true;
             }
-            return response.text();
-        })
-        .then(data => {
-            console.log("Данные успешно отправлены. Ответ сервера:", data);
-            // goToStep('thankYou'); //РАССКОММЕНТИРОВАТЬ ЭТУ СТРОКУ, когда будет реальный обработчик
-        })
-        .catch(error => {
-            console.error("Ошибка при отправке данных:", error);
-            alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение к интернету и попробуйте ещё раз.");
-            goToStep(6); 
+        }, true);
+    }
+
+    if (steps[4]) {
+        steps[4].addEventListener('click', function(e) {
+            if(e.target.closest('.single-choice')) return;
+            restoreSingleSelectState('#step4 .single-choice', state.answers.style);
+            const nextButton = document.getElementById('nextToStep5');
+            if (state.answers.style) {
+                hideError('error-step4');
+                nextButton.disabled = false;
+            } else {
+                showError('error-step4');
+                nextButton.disabled = true;
+            }
+        }, true);
+    }
+
+    if (steps[5]) {
+        steps[5].addEventListener('click', function(e) {
+            if(e.target.closest('.single-choice')) return;
+            restoreSingleSelectState('#step5 .single-choice', state.answers.budget);
+            const nextButton = document.getElementById('nextToStep6');
+            if (state.answers.budget) {
+                hideError('error-step5');
+                nextButton.disabled = false;
+            } else {
+                showError('error-step5');
+                nextButton.disabled = true;
+            }
+        }, true);
+    }
+
+    const backToHome = document.getElementById('backToHome');
+    if (backToHome) {
+        backToHome.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    }
+
+    const nameInput = document.getElementById('name');
+    if (nameInput) {
+        nameInput.addEventListener('input', function() {
+            state.answers.name = this.value.trim();
+        });
+    }
+
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            state.answers.phone = this.value.trim();
+            if (validateStep(6)) {
+                hideError('error-phone');
+            }
+        });
+    }
+
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        emailInput.addEventListener('input', function() {
+            state.answers.email = this.value.trim();
+        });
+    }
+
+    const commentInput = document.getElementById('comment');
+    if (commentInput) {
+        commentInput.addEventListener('input', function() {
+            state.answers.comment = this.value.trim();
+        });
+    }
+
+    const consentCheckbox = document.getElementById('consent');
+    if (consentCheckbox) {
+        consentCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                hideError('error-consent');
+            }
+        });
+    }
+
+    const nextToStep2 = document.getElementById('nextToStep2');
+    if (nextToStep2) {
+        nextToStep2.addEventListener('click', function() {
+            if (validateStep(1)) {
+                goToStep(2);
+            }
+        });
+    }
+
+    const backToStep1 = document.getElementById('backToStep1');
+    if (backToStep1) {
+        backToStep1.addEventListener('click', function() {
+            goToStep(1);
+        });
+    }
+
+    const nextToStep3 = document.getElementById('nextToStep3');
+    if (nextToStep3) {
+        nextToStep3.addEventListener('click', function() {
+            if (validateStep(2)) {
+                goToStep(3);
+            }
+        });
+    }
+
+    const backToStep2 = document.getElementById('backToStep2');
+    if (backToStep2) {
+        backToStep2.addEventListener('click', function() {
+            goToStep(2);
+        });
+    }
+
+    const nextToStep4 = document.getElementById('nextToStep4');
+    if (nextToStep4) {
+        nextToStep4.addEventListener('click', function() {
+            goToStep(4);
+        });
+    }
+
+    const backToStep3 = document.getElementById('backToStep3');
+    if (backToStep3) {
+        backToStep3.addEventListener('click', function() {
+            goToStep(3);
+        });
+    }
+
+    const nextToStep5 = document.getElementById('nextToStep5');
+    if (nextToStep5) {
+        nextToStep5.addEventListener('click', function() {
+            if (validateStep(4)) {
+                goToStep(5);
+            }
+        });
+    }
+
+    const backToStep4 = document.getElementById('backToStep4');
+    if (backToStep4) {
+        backToStep4.addEventListener('click', function() {
+            goToStep(4);
+        });
+    }
+
+    const nextToStep6 = document.getElementById('nextToStep6');
+    if (nextToStep6) {
+        nextToStep6.addEventListener('click', function() {
+            if (validateStep(5)) {
+                goToStep(6);
+            }
+        });
+    }
+
+    const backToStep5 = document.getElementById('backToStep5');
+    if (backToStep5) {
+        backToStep5.addEventListener('click', function() {
+            goToStep(5);
+        });
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (validateStep(6) && !state.isSubmitting) {
+                state.isSubmitting = true;
+                this.disabled = true;
+                this.textContent = 'Отправка...';
+                goToStep('thankYou');
+            }
+        });
+    }
+
+function submitData() {
+    const quizData = {
+        room_type: state.answers.room_type,
+        zones: state.answers.zones,
+        area: state.answers.area,
+        style: state.answers.style,
+        budget: state.answers.budget,
+        name: state.answers.name || '',
+        phone: state.answers.phone,
+        email: state.answers.email || '',
+        comment: state.answers.comment || '',
+        consent_accepted: document.getElementById('consent') ? document.getElementById('consent').checked ? 1 : 0 : 1,
+        page_url: window.location.href,
+        timestamp: new Date().toISOString()
+    };
+
+    console.log("Отправка данных:", quizData);
+
+    var scriptPath = '';
+    var currentPath = window.location.pathname;
+    var pathParts = currentPath.split('/');
+    pathParts.pop(); // Удаляем имя файла
+    scriptPath = pathParts.join('/') + '/';
+
+    if (window.location.protocol === 'file:') {
+        scriptPath = '';
+    }
+
+    var ajaxUrl = scriptPath + 'save_quiz_data.php';
+    console.log("URL для AJAX:", ajaxUrl);
+
+    fetch('http://localhost:8000/save_quiz_data.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(quizData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Ответ сервера:", data);
+        if (data.success) {
+            console.log("Заявка успешно сохранена! ID:", data.lead_id);
+        } else {
+            console.error("Ошибка от сервера:", data.message);
+            alert("Произошла ошибка при отправке: " + data.message);
+            goToStep(6);
             state.isSubmitting = false;
             const btn = document.getElementById('submitBtn');
             if(btn) {
                 btn.disabled = false;
                 btn.textContent = 'Получить консультацию';
             }
-        })
-
-        .finally(() => {
-            const btn = document.getElementById('submitBtn');
-            if(btn && state.isSubmitting) {
-                state.isSubmitting = false;
-                btn.disabled = false;
-                btn.textContent = 'Получить консультацию';
-            }
-        });
-    }
+        }
+    })
+    .catch(error => {
+        console.error("Ошибка сети:", error);
+        alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение к интернету и попробуйте ещё раз.");
+        goToStep(6);
+        state.isSubmitting = false;
+        const btn = document.getElementById('submitBtn');
+        if(btn) {
+            btn.disabled = false;
+            btn.textContent = 'Получить консультацию';
+        }
+    });
+}
 
     updateProgressBar();
-}); 
+});
