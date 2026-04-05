@@ -7,7 +7,6 @@ import re
 vib = input("Вы уверены? y/n: ")
 if vib == "n":
     exit()
-
 DB_CONFIG = {
     'host': '26.64.81.120',
     'port': 3306,          # <-- МЕНЯЙ ПОРТ ТУТ
