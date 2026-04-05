@@ -210,8 +210,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Восстановление состояния для одиночного выбора
     function restoreSingleSelectState(selector, value) {
         document.querySelectorAll(selector).forEach(card => {
             card.classList.toggle('selected', card.getAttribute('data-value') === value);
@@ -345,28 +343,49 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitData() {
-        const formData = new FormData();
-        Object.keys(state.answers).forEach(key => {
-            if (Array.isArray(state.answers[key])) {
-                state.answers[key].forEach(val => formData.append(key, val));
-            } else {
-                formData.append(key, state.answers[key]);
+        const quizData = { ...state.answers };
+        quizData.page_url = window.location.href;
+        quizData.timestamp = new Date().toISOString();
+
+        console.log("Данные для отправки:", quizData);
+
+        fetch('path/to/your/handler.php', { //ЗАМЕНИТЬ ЭТОТ ПУТЬ, или пусть будет для примера
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(quizData),
+        })
+        .then(response => {
+            console.log("Ответ сервера:", response.status);
+            if (!response.ok) {
+                throw new Error(`Сервер вернул ошибку: ${response.status} ${response.statusText}`);
             }
-        });
-        state.answers.page_url = window.location.href;
-        state.answers.timestamp = new Date().toISOString();
-
-        console.log("Данные для отправки:", state.answers);
-
-
-        setTimeout(() => {
+            return response.text();
+        })
+        .then(data => {
+            console.log("Данные успешно отправлены. Ответ сервера:", data);
+            // goToStep('thankYou'); //РАССКОММЕНТИРОВАТЬ ЭТУ СТРОКУ, когда будет реальный обработчик
+        })
+        .catch(error => {
+            console.error("Ошибка при отправке данных:", error);
+            alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение к интернету и попробуйте ещё раз.");
+            goToStep(6); 
             state.isSubmitting = false;
             const btn = document.getElementById('submitBtn');
             if(btn) {
                 btn.disabled = false;
                 btn.textContent = 'Получить консультацию';
             }
-        }, 500);
+        })
+        .finally(() => {
+            const btn = document.getElementById('submitBtn');
+            if(btn && state.isSubmitting) {
+                state.isSubmitting = false;
+                btn.disabled = false;
+                btn.textContent = 'Получить консультацию';
+            }
+        });
     }
 
     updateProgressBar();
