@@ -10,11 +10,11 @@ if vib == "n":
 
 DB_CONFIG = {
     'host': '26.64.81.120',
-    'port': 3306,          # <-- МЕНЯЙ ПОРТ ТУТ
+    'port': 3306,       
     'user': 'quiz_api',
     'password': 'Str0ngPass!23',
     'database': 'mydb',
-    'connect_timeout': 5,  # Не даст скрипту зависнуть
+    'connect_timeout': 5, 
     'use_pure': True,
     'charset': 'utf8mb4'
 }
@@ -45,21 +45,20 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
         # 2. SQL запрос (проверь названия колонок!)
         sql_insert = """
             INSERT INTO leads 
-            (phone_number, first_name, last_name, area, room_types_rtp_id, budgets_bdt_id,
-             styles_stl_id, status, consent_accepted,email)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (phone_number, name, area, room_types_rtp_id, budgets_bdt_id,
+            styles_stl_id, status, consent_accepted, email)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
             #После удаления n обезательно убрать n кол-во VALUES(%s)
         values = (
-            lead_data['phone'],
-            lead_data.get('first_name'),
-            lead_data.get('last_name'),
+            lead_data['phone'],              # или phone_number, если везде используем его
+            lead_data.get('first_name'),           # теперь просто name
             lead_data.get('area'),
             lead_data.get('room_type_id'),
             lead_data.get('budget_id'),
             lead_data.get('style_id'),
-            'new', #НЕ ТРОГАТЬ!!!!
-            1, # НЕ ТРОГАТЬ!!!!
+            'new',                           # НЕ ТРОГАТЬ!
+            1,                               # НЕ ТРОГАТЬ!
             lead_data.get('email'),
         )
 
@@ -90,7 +89,7 @@ def save_lead_to_db(lead_data: dict, zone_ids: list[int] = None):
 
 if __name__ == "__main__":
     test_data = {
-        'phone': '+78653741488',
+        'phone_number': '+78653741488',
         'first_name': 'Иван',
         'last_name': 'ыааыаыа',
         'area': 666,

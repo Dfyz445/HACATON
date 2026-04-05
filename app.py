@@ -31,7 +31,7 @@ def create_lead(data: dict, zone_ids: list[int]) -> int:
             """
         lead_values = (
         data['phone_number'],
-        data.get('name'),
+        data.get('first_name'),
         data['area'],
         data['room_types_rtp_id'],
         data.get('budgets_bdt_id'),
