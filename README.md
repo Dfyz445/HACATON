@@ -56,10 +56,10 @@ pythoon app.py
 ```
 
 ### Разработчики
-Скопич Ника - командир, Backend разработчик (t.me/kivi_inside)
-Лавришкина Анастасия - Frontend разработчик (t.me/hiroruri)
-Холкин Даниил - SQL-разработчик (t.me/WT_Vee_nV)
-Ткачук Иван - главный Backend разработчик (t.me/Dfyz_445)
+- Скопич Ника - командир, Backend разработчик (t.me/kivi_inside)
+- Лавришкина Анастасия - Frontend разработчик (t.me/hiroruri)
+- Холкин Даниил - SQL-разработчик (t.me/WT_Vee_nV)
+- Ткачук Иван - главный Backend разработчик (t.me/Dfyz_445)
 
 
 
