@@ -11,7 +11,7 @@
 
 ### Основной стек технологий:
 - HTML, CSS, JS
-- Python
+- PHP
 - SQL (MySQL)
 - Git
 
@@ -21,7 +21,7 @@
 
 ## Среда запуска
 
-1. Для кода необходим текстобый редактор кода (Visual Studi Code, PyCharm и др.)
+1. Для кода необходим текстобый редактор кода (Visual Studio Code, PyCharm и др.)
 2. Требуется установленная СУБД MySQL (версия 8+)
 3. Требуются установленные библиотеки, указанные в requirements.txt.
 
@@ -52,7 +52,7 @@ Database: mydb
 В папке проекта откройте терминал и выполните:
 ```
 pip install requirements.txt
-pythoon app.py
+python app.py
 ```
 
 ### Разработчики
